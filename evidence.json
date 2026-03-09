@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "LazyLean Evidence Database",
+    "author": "Alexia Le",
+    "version": "1.0.0",
+    "last_updated": "2026-03",
+    "sources": ["NIH ODS", "OMA 2026", "GoodRx", "FDA Prescribing Data"]
+  },
+  "otc_supplements": [
+    { "name": "Garcinia Cambogia", "rating": "hype", "avg_loss_kg": 0.88, "weeks": 12, "risk": "liver damage (case reports)", "nih_verdict": "Little to no effect" },
+    { "name": "Green Tea Extract", "rating": "hype", "avg_loss_kg": 0.95, "weeks": 12, "risk": "liver damage", "nih_verdict": "Not clinically relevant" },
+    { "name": "Raspberry Ketone", "rating": "hype", "avg_loss_kg": 0, "weeks": null, "risk": "unknown", "nih_verdict": "No human RCT data" },
+    { "name": "Glucomannan", "rating": "partial", "avg_loss_kg": 0.79, "weeks": 5, "risk": "esophageal obstruction if tablet form", "nih_verdict": "Inconsistent results" },
+    { "name": "Psyllium Husk", "rating": "partial", "avg_loss_kg": null, "weeks": null, "risk": "low if used correctly", "nih_verdict": "Effective for satiety" },
+    { "name": "CLA", "rating": "partial", "avg_loss_kg": 1.33, "weeks": 52, "risk": "lipid profile effects", "nih_verdict": "Small, uncertain effect" },
+    { "name": "Orlistat (Alli OTC)", "rating": "works", "avg_loss_pct": 5, "weeks": 52, "risk": "oily stools, drug interactions", "nih_verdict": "Only FDA-approved OTC weight-loss drug" }
+  ],
+  "prescription_drugs": [
+    { "name": "Tirzepatide", "brand": "Zepbound", "type": "GLP-1 + GIP dual agonist", "avg_loss_pct": 21, "frequency": "weekly", "monthly_cost_usd": 1180, "approved_age": 18 },
+    { "name": "Semaglutide injectable", "brand": "Wegovy", "type": "GLP-1 agonist", "avg_loss_pct": 15.8, "frequency": "weekly", "monthly_cost_usd": 1350, "approved_age": 12 },
+    { "name": "Liraglutide", "brand": "Saxenda", "type": "GLP-1 agonist", "avg_loss_pct": 8, "frequency": "daily", "monthly_cost_usd": 1000, "approved_age": 12 },
+    { "name": "Orlistat", "brand": "Xenical (Rx)", "type": "Lipase inhibitor", "avg_loss_pct": 5, "frequency": "3x daily with meals", "monthly_cost_usd": 75, "approved_age": 12 },
+    { "name": "Phentermine-topiramate", "brand": "Qsymia", "type": "Appetite suppressant", "avg_loss_pct": 9, "frequency": "daily oral", "monthly_cost_usd": 180, "approved_age": 12 },
+    { "name": "Naltrexone-bupropion", "brand": "Contrave", "type": "CNS appetite modulator", "avg_loss_pct": 7, "frequency": "daily oral", "monthly_cost_usd": 200, "approved_age": 18 }
+  ],
+  "simulation_params": {
+    "kcal_per_kg_fat": 7700,
+    "safe_weekly_loss_kg": [0.5, 1.0],
+    "strategy_deficits_kcal_per_day": {
+      "pre_meal_fiber": 200,
+      "protein_shake_meal_swap": 250,
+      "15min_walk": 150,
+      "cut_sugary_drinks": 100,
+      "sleep_7_8hrs": 80
+    },
+    "monte_carlo_adherence_noise": 0.20
+  },
+  "fiber_protocols": {
+    "psyllium": {
+      "start_dose_g": 1,
+      "max_dose_g": 10,
+      "timing_min_before_meal": 20,
+      "water_ml_per_dose": 300,
+      "cost_per_day_usd": 0.15,
+      "warning": "Mix immediately, drink quickly. Space 2hrs from medications."
+    },
+    "glucomannan": {
+      "start_dose_g": 0.5,
+      "max_dose_g": 3,
+      "timing_min_before_meal": 20,
+      "water_ml_per_dose": 300,
+      "cost_per_day_usd": 0.22,
+      "warning": "Capsule or powder ONLY — never tablets. Never take lying down."
+    }
+  },
+  "saxenda_titration": [
+    { "week": 1, "dose_mg": 0.6, "note": "Body adjustment phase" },
+    { "week": 2, "dose_mg": 1.2, "note": "If 0.6mg tolerated" },
+    { "week": 3, "dose_mg": 1.8, "note": "If prior dose tolerated" },
+    { "week": 4, "dose_mg": 2.4, "note": "If prior dose tolerated" },
+    { "week": 5, "dose_mg": 3.0, "note": "Maintenance dose (maximum)" }
+  ],
+  "glp1_vitamin_protocol": [
+    { "supplement": "Vitamin B12", "form": "Methylcobalamin", "dose": "500–1000 mcg/day", "priority": "critical", "reason": "GLP-1 slows absorption; deficiency causes fatigue and nerve issues" },
+    { "supplement": "Vitamin D3 + K2", "form": "Cholecalciferol + MK-7", "dose": "1000–2000 IU/day", "priority": "critical", "reason": "Most common deficiency in GLP-1 users; affects bone and metabolism" },
+    { "supplement": "Magnesium Glycinate", "form": "Magnesium glycinate", "dose": "200–400 mg/day", "priority": "important", "reason": "Prevents cramps, poor sleep, anxiety — common GLP-1 complaints" },
+    { "supplement": "Protein", "form": "Whey or pea isolate", "dose": "1.2–2.0 g/kg/day", "priority": "important", "reason": "OMA recommends to prevent muscle loss during rapid weight reduction" },
+    { "supplement": "Calcium Citrate", "form": "Calcium citrate", "dose": "500–1000 mg/day (split)", "priority": "important", "reason": "Rapid weight loss accelerates bone density loss" },
+    { "supplement": "Zinc", "form": "Zinc gluconate", "dose": "8–11 mg/day", "priority": "supportive", "reason": "GLP-1 studies show significant serum zinc drops" },
+    { "supplement": "Iron", "form": "Ferrous bisglycinate", "dose": "Per blood test only", "priority": "supportive", "reason": "Most common deficiency in women on GLP-1 therapy" }
+  ]
+}
